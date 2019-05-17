@@ -54,7 +54,7 @@ def runPipe(subprocesos, prevEntry = None):
 # caracteres que representa la salida de ejecucion de dicho comando.
 #
 def runCommand(command):
-  return runPipe(subprocesos(command))
+  return runPipe(subprocesos(command)).decode("utf-8")
 
 #
 # Pruebas
