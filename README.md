@@ -1,4 +1,3 @@
-# CLI's output to JSON
+# RunCLI
 
-This Python class allows to execute a CLI-based application and return its output in JSON format.
-
+Script en Python que permite la ejecucion de un comando y regresa una cadena de caracteres que representa la salida de dicha ejecucion.
