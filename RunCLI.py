@@ -2,8 +2,8 @@
 #
 # Este script en Python implementa una funcion llamada runCommand que recibe
 # como argumento una cadena que representa una ejecucion de un comando regular
-# en el shell y retorna en formato JSON la salida de la ejecucion. El objetivo
-# de esta funcion es procesar aquellas instrucciones que tienen el simbolo 
+# en el shell y retorna la salida de la ejecucion de dicho comando. El objetivo
+# de esta funcion es procesar aquellas lineas de comando que tienen el simbolo 
 # 'pipe' o '|'.
 #
 # Author: John Sanabria - john.sanabria@gmail.com
@@ -56,6 +56,9 @@ def runPipe(subprocesos, prevEntry = None):
 def runCommand(command):
   return runPipe(subprocesos(command))
 
+#
+# Pruebas
+#
 command = "   ls     -la     "
 print("[1] %s"%runCommand(command))
 
