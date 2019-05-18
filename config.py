@@ -1,0 +1,1 @@
+VAGRANTSERVICEHOME = "/Users/john/.vagrantservice"
