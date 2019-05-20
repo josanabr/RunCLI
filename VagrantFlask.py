@@ -19,19 +19,38 @@ import config
 
 app = Flask(__name__)
 
-
+#
+# Este metodo retorna la cadena 'hello world' retornada al ejecutar el comando
+# "echo 'hello world'".
+#
 @app.route('/')
 def helloworld():
     return jsonify(output=RunCLI.runCommand("echo 'hello world'"))
 
+#
+# Este metodo retorna el contenido del directorio al cual apunta la variable
+# config.VAGRANSERVICEHOME definida en el archivo config.py
+#
 @app.route("/vagrant/list")
 def vagrantlist():
     return jsonify(outpput=RunCLI.runCommand("ls %s"%(config.VAGRANTSERVICEHOME)))
 
+#
+# Este metodo retorna el contenido de un archivo llamado '<name>' y que se 
+# encuentra en el directorio al que apunta la variable 
+# config.VAGRANTSERVICEHOME.
+#
+# El contenido del archivo '<name>' debera contener un directorio donde 
+# se ha definido una maquina virtual con la herramienta Vagrant
+#
 @app.route("/vagrant/located/<name>")
 def vagrantlocated(name):
     return jsonify(output=RunCLI.runCommand("cat %s/%s"%(config.VAGRANTSERVICEHOME,name)))
 
+#
+# Este metodo es muy PELIGROSO y permite la ejecucion de un comando arbitrario
+# en un sistema Unix/Linux.
+#
 @app.route("/run/<command>")
 def runCommand(command):
     return jsonify(output=RunCLI.runCommand(command))
