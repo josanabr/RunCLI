@@ -55,6 +55,11 @@ def vagrantlocated(name):
 def runCommand(command):
     return jsonify(output=RunCLI.runCommand(command))
 
+#
+# Este metodo se puede invocar de la siguiente manera
+#
+# curl http://localhost:5000/vagrant/isrunning/Users/john/Src/vagrant
+#
 @app.route("/vagrant/isrunning/<path:dirproject>")
 @app.route("/vagrant/isrunning/")
 def vagrantrunning(dirproject=config.VAGRANTPROJECT):
@@ -62,6 +67,9 @@ def vagrantrunning(dirproject=config.VAGRANTPROJECT):
     dirproject = "/" + dirproject
     print("Dir: %s"%dirproject)
     os.chdir(dirproject)
+    #
+    # Se debe validar que en el directorio que paso el usuario exista un Vagrantfile
+    #
     output = RunCLI.runCommand("vagrant status | grep default  | grep running | wc -l")
     output = ' '.join(output.split())
     if int(output) == 0:
