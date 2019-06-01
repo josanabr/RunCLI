@@ -55,3 +55,19 @@ def vagrantlocated(name):
 def runCommand(command):
     return jsonify(output=RunCLI.runCommand(command))
 
+@app.route("/vagrant/isrunning/<path:dirproject>")
+@app.route("/vagrant/isrunning/")
+def vagrantrunning(dirproject=config.VAGRANTPROJECT):
+    currentdir = os.getcwd()
+    dirproject = "/" + dirproject
+    print("Dir: %s"%dirproject)
+    os.chdir(dirproject)
+    output = RunCLI.runCommand("vagrant status | grep default  | grep running | wc -l")
+    output = ' '.join(output.split())
+    if int(output) == 0:
+        output="not running"
+    else:
+        output="running"
+    os.chdir(currentdir)
+    return jsonify(output=output)
+
